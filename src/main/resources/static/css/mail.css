@@ -1,0 +1,87 @@
+
+body {
+    padding-top: 50px;
+}
+
+.container {
+    max-width: 100%;
+    padding: 0 15px;
+}
+
+.form-container {
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.file-input-container {
+    margin-bottom: 20px;
+}
+
+.file-input-container input[type="file"] {
+    display: none;
+}
+
+.file-input-label {
+    display: block;
+    margin-bottom: 10px;
+    cursor: pointer;
+    padding: 10px 15px;
+    background-color: #337ab7;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.file-input-label:hover {
+    background-color: #286090;
+}
+
+.file-list {
+    margin-top: 10px;
+    list-style: none;
+    padding: 0;
+}
+
+.file-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.file-list-item .file-name {
+    margin-right: 10px;
+}
+
+.delete-button {
+    cursor: pointer;
+    color: red;
+}
+
+@media (min-width: 768px) {
+    .form-container {
+        max-width: 400px;
+    }
+}
+
+/* 모달 스타일 */
+#loadingModal {
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.24); /* 배경을 흐릿하게 설정 */
+}
+
+#loadingModal .modal-content {
+    text-align: center; /* 텍스트를 중앙으로 배치 */
+    background-color: #ffffff; /* 모달 배경색 */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* 그림자 효과 */
+}
