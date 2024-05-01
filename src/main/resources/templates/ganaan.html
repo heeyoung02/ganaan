@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Send Mail</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        body {
+            padding-top: 50px;
+        }
+
+        .container {
+            max-width: 100%;
+            padding: 0 15px;
+        }
+
+        .form-container {
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f7f7f7;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .file-input-container {
+            margin-bottom: 20px;
+        }
+
+        .file-input-container input[type="file"] {
+            display: none;
+        }
+
+        .file-input-label {
+            display: block;
+            margin-bottom: 10px;
+            cursor: pointer;
+            padding: 10px 15px;
+            background-color: #337ab7;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        .file-input-label:hover {
+            background-color: #286090;
+        }
+
+        .file-list {
+            margin-top: 10px;
+            list-style: none;
+            padding: 0;
+        }
+
+        .file-list-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .file-list-item .file-name {
+            margin-right: 10px;
+        }
+
+        .delete-button {
+            cursor: pointer;
+            color: red;
+        }
+
+        @media (min-width: 768px) {
+            .form-container {
+                max-width: 400px;
+            }
+        }
+
+        /* 모달 스타일 */
+        #loadingModal {
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.24); /* 배경을 흐릿하게 설정 */
+        }
+
+        #loadingModal .modal-content {
+            text-align: center; /* 텍스트를 중앙으로 배치 */
+            background-color: #ffffff; /* 모달 배경색 */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* 그림자 효과 */
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <div class="form-container">
+        <h1 class="text-center">가나안교회로 사진 전송</h1>
+        <br>
+
+        <form th:action="@{/mail/send}" method="post" enctype="multipart/form-data" id="sendForm">
+
+            <input type="hidden" class="form-control" name="address" placeholder="">
+
+            <div class="form-group">
+                <label>성함</label>
+                <input type="text" class="form-control" name="title" placeholder="성함을 입력하세요">
+            </div>
+
+            <div class="form-group">
+                <label>내용</label>
+                <textarea class="form-control" name="content" placeholder="보낼 내용을 입력하세요"></textarea>
+            </div>
+
+            <div class="file-input-container">
+                <label class="file-input-label">
+                    사진 고르기
+                    <input type="file" name="files" class="file-input" accept="image/*" multiple>
+                </label>
+            </div>
+
+            <div class="file-list" id="selectedFiles"></div>
+
+            <button type="button" class="btn btn-primary pull-right" onclick="sendFilesToServer()">발송</button>
+
+        </form>
+    </div>
+</div>
+
+<!-- 모달 요소 -->
+<div class="modal" id="loadingModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>전송중...</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+
+<script>
+
+    $(document).ready(function() {
+        // 페이지가 준비되면 모달을 숨깁니다.
+        $('#loadingModal').modal('hide');
+    });
+
+    let multipartFiles = []; // 클라이언트 측에서 관리할 MultipartFile 배열
+
+    document.querySelector('input[type="file"]').addEventListener('change', handleFileInputChange);
+
+    function handleFileInputChange(event) {
+        const files = event.target.files;
+
+        for (let i = 0; i < files.length; i++) {
+            multipartFiles.push(files[i]); // 선택한 파일을 배열에 추가
+        }
+
+        renderFileList(); // 파일 목록을 UI에 업데이트
+    }
+
+    function renderFileList() {
+        const selectedFilesContainer = document.getElementById('selectedFiles');
+        selectedFilesContainer.innerHTML = ''; // 기존 목록을 초기화
+
+        const fileList = document.createElement('ul');
+        fileList.className = 'list-unstyled';
+
+        multipartFiles.forEach((file, index) => {
+            const listItem = document.createElement('li');
+            listItem.className = 'file-list-item';
+            const fileName = document.createElement('span');
+            fileName.className = 'file-name';
+            fileName.textContent = file.name;
+            const deleteButton = document.createElement('span');
+            deleteButton.className = 'delete-button';
+            deleteButton.textContent = 'x';
+            deleteButton.addEventListener('click', () => {
+                // 해당 파일을 배열에서 제거
+                multipartFiles.splice(index, 1);
+                renderFileList(); // 목록을 다시 렌더링하여 업데이트
+            });
+            listItem.appendChild(fileName);
+            listItem.appendChild(deleteButton);
+            fileList.appendChild(listItem);
+        });
+
+        selectedFilesContainer.appendChild(fileList);
+    }
+
+    function sendFilesToServer() {
+
+        const formData = new FormData();
+
+        multipartFiles.forEach((file, index) => {
+            formData.append('files', file); // 'files'는 서버에서 받을 파라미터 이름
+        });
+
+        formData.append('address', sendForm.address.value);
+        formData.append('content', sendForm.content.value);
+        formData.append('title', sendForm.title.value);
+
+        const url = '/mail/send';
+
+        // AJAX 요청 전에 로딩 모달 표시
+        $('#loadingModal').modal('show');
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: formData,
+            processData: false,  // processData를 false로 설정하여 formData를 변환하지 않음
+            contentType: false,  // contentType을 false로 설정하여 jQuery가 Content-Type 설정을 처리하지 않음
+            success: function (response) {
+                console.log('파일 전송 성공');
+                window.location.href = '/result'; // 성공 시 결과 페이지로 이동
+            },
+            error: function (xhr, status, error) {
+                console.error('서버 응답 오류:', xhr.status);
+                alert('서버 응답 오류가 발생했습니다.');
+            },
+            complete: function () {
+                // AJAX 요청 완료 후 로딩 모달 닫기
+                $('#loadingModal').modal('hide');
+            }
+        });
+
+    }
+</script>
+
+</html>
