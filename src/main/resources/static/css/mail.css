@@ -67,12 +67,6 @@ body {
     color: red;
 }
 
-@media (min-width: 768px) {
-    .form-container {
-        max-width: 400px;
-    }
-}
-
 /* 모달 스타일 */
 #loadingModal {
     align-items: center;

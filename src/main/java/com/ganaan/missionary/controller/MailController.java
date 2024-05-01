@@ -19,7 +19,7 @@ public class MailController {
         this.mailService = mailService;
     }
 
-    @GetMapping("/ganaan")
+    @GetMapping("/")
     public String mailSend() {
         return "ganaan";
     }
@@ -32,6 +32,7 @@ public class MailController {
     @PostMapping("/mail/send")
     @ResponseBody
     public String sendMail(MailDTO mailDto, MultipartFile[] files) throws MessagingException, IOException {
+        if(files == null) files = new MultipartFile[0];
         try {
             mailService.sendMultipleMessage(mailDto, files);
             System.out.println("메일 전송 완료");
