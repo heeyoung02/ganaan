@@ -3,60 +3,87 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Send Mail</title>
 
+    <!---->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!---->
     <link rel="stylesheet" href="/css/mail.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
+    <!-- Template Stylesheet -->
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sunflower:wght@500&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dongle&display=swap">
+    <!-- Bootstrap CSS를 연결합니다. -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- jQuery 추가 (Bootstrap 5에서 필요) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap Icons CSS를 연결합니다. -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
-<div class="container">
-    <div class="form-container">
-        <h1 class="text-center">가나안교회로 사진 전송</h1>
-        <br>
+<div id="wrapper" style="width: 375px; margin: auto;" alt="before 2018.06.18 pc - w323px">
+    <!-- 섹션 시작 -->
+    <img src="img/main.jpg" class="img-fluid" alt="...">
+    <div class="section">
+        <div class="text_invite">
+            포토존 사진보내기
+        </div>
+    </div>
+    <div class="section02">
+    <form class="photoSendingForm" th:action="@{/mail/send}" method="post" enctype="multipart/form-data" id="sendForm">
 
-        <form th:action="@{/mail/send}" method="post" enctype="multipart/form-data" id="sendForm">
+        <input type="hidden" class="form-control" name="address" placeholder="">
 
-            <input type="hidden" class="form-control" name="address" placeholder="">
+        <div class="file-input-container">
+            <label class="file-input-label">
+                (1) 사진 고르기
+                <input type="file" name="files" class="file-input" accept="image/*" multiple>
+            </label>
+        </div>
 
-            <div class="form-group">
-                <label>성함</label>
-                <input type="text" class="form-control" name="title" placeholder="성함을 입력하세요">
-            </div>
+        <div class="file-list" id="selectedFiles"></div>
 
-            <div class="form-group">
-                <label>내용</label>
-                <textarea class="form-control" name="content" placeholder="보낼 내용을 입력하세요"></textarea>
-            </div>
+        <div class="form-group">
+            <label class="photoSendingLabel">성함</label>
+            <input type="text" class="form-control photoSendingInput" name="title" placeholder="(2) 성함을 입력하세요">
+        </div>
 
-            <div class="file-input-container">
-                <label class="file-input-label">
-                    사진 고르기
-                    <input type="file" name="files" class="file-input" accept="image/*" multiple>
-                </label>
-            </div>
+        <div class="form-group">
+            <label class="photoSendingLabel">내용</label>
+            <textarea class="form-control photoSendingInput" name="content" placeholder="(3) 보낼 내용을 입력하세요"></textarea>
+        </div>
 
-            <div class="file-list" id="selectedFiles"></div>
 
-            <button type="button" class="btn btn-primary pull-right" onclick="sendFilesToServer()">발송</button>
+        <button type="button" class="btn btn-primary pull-right photoSendingBtn" onclick="sendFilesToServer()">(4) 발송
+        </button>
 
-        </form>
+    </form>
+    </div>
+    <!--마지막 섹션 시작-->
+    <div class="section_final">
+        <div class="text_final">대한 예수교 장로회 춘천가나안교회<br><i class="bi bi-suit-heart-fill"></i></div>
     </div>
 </div>
-
-<!-- 모달 요소 -->
-<div class="modal" id="loadingModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                <p>전송중...</p>
+    <!-- 모달 요소 -->
+    <div class="modal" id="loadingModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>전송중...</p>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 </body>
 

@@ -1,0 +1,199 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+.img-fluid{
+    max-width: 100%; 
+    height: auto;
+}
+.img-fluid-dot{
+    display: block; /* 이미지를 블록 요소로 설정 */
+    margin: 0 auto; /* 가로 중앙 정렬 */
+}
+.section {
+    background-color: #FEF2E2;
+    padding-bottom: 25px;
+    padding-left: 35px;
+    padding-right: 35px;
+    padding-top: 25px;
+}
+.section02 {
+    background-color: #fafafa;
+    padding-bottom: 25px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 25px;
+    display: flex; /* Flexbox 사용 */
+    flex-direction: column; /* 세로 방향으로 정렬 */
+    height: 500px; /* 세로 크기를 500px로 고정 */
+    overflow: auto; /* 내용이 섹션을 벗어날 경우 스크롤바 표시 */
+}
+.text_head {
+    text-align: center;
+    margin-bottom: 20px;
+    color: rgba(51, 49, 49, 1);
+    font-weight: bold;
+}
+
+.text_invite,body{
+    font-family: 'Dongle', sans-serif;
+    font-size: 30px; 
+    text-align: center;
+    margin-top: 20px;
+}
+
+.photoSendingForm,.photoSendingBtn{
+    font-family: 'Dongle', sans-serif;
+    font-size: 30px;
+    margin-top: 20px;
+}
+
+.photoSendingInput,.photoSendingLabel{
+    font-size: 30px;
+    text-align: left;
+    margin: 0 auto; /* 좌우 여백을 auto로 설정하여 가운데 정렬합니다. */
+    display: block; /
+}
+.photoSendingBtn{
+    padding-left: 20px;
+    padding-right: 20px;
+    border-color: #337AB7;
+    background:#337AB7;
+}
+.text_invite_body{
+    font-family: 'Dongle', sans-serif;
+    font-size: 24px; 
+    text-align: center;
+    color: #333333;
+}
+
+.text_invite_body br {
+    margin-bottom: 50px; /* 원하는 간격 크기 설정 */
+}
+
+.text_photo{
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: rgba(51, 49, 49, 1);
+    font-weight: bold;
+
+}
+
+
+.thumbnail{
+    width: 100%; /* 이미지 컨테이너의 고정 너비 */
+    height: 150px; /* 이미지 컨테이너의 고정 높이 */
+    display: inline-block; /* 이미지 요소를 가로로 배열 */
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+
+    
+}
+
+.section02 .thumbnail img {
+    width: 100%; /* 이미지를 100% 너비로 표시하여 컨테이너에 맞게 조절 */
+    height: auto; /* 이미지 높이를 자동으로 조절하여 비율 유지 */
+    margin-bottom: 10px;
+}
+
+
+
+.text_location{
+    text-align: center;
+    margin-bottom: 20px;
+    color: rgba(51, 49, 49, 1);
+    font-weight: bold;
+}
+
+.address{
+    margin-top: 20px;
+    font-size: 25px;
+    font-family: 'Dongle', sans-serif;
+}
+
+.section02 .image-gallery {
+    flex: 1; /* 내용물이 높이에 따라 부모 요소의 높이를 조절 */
+    overflow: auto; /* 내용물이 넘칠 경우 스크롤 표시 */
+}
+
+
+.text_together{
+
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: rgba(51, 49, 49, 1);
+    font-weight: bold;
+
+}
+
+.card-text{
+    font-size: 25px;
+    font-family: 'Dongle', sans-serif;
+    text-align: center;
+}
+
+.card_time{
+    margin-top: 30px;
+    font-family: 'Dongle', sans-serif;
+    text-align: center;
+    font-size: 30px;
+}
+
+button {
+    margin-top: 10px; /* 버튼 상단에 10px 마진 적용 */
+}
+
+.accordion_youtube{
+    text-align: center;
+    font-family: 'Dongle', sans-serif;
+    font-size: 30px;
+}
+
+.text_legacy{
+    text-align: center;
+    margin-bottom: 20px;
+    color: rgba(51, 49, 49, 1);
+    font-weight: bold;
+
+}
+
+.text_contact{
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    color: rgba(51, 49, 49, 1);
+    font-weight: bold;
+
+}
+
+.text_share{
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    color: rgba(51, 49, 49, 1);
+    font-weight: bold;
+
+}
+
+.share-icons {
+    display: flex;
+    justify-content: center; /* 두 아이콘을 좌우 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    gap: 50px; /* 두 아이콘 사이의 간격 설정 (원하는 크기로 조정) */
+}
+
+.section_final{
+    /* background-color: #88c5cd; */
+    background-color: #FEF2E2;
+    
+        
+}
+
+.text_final{
+    text-align: center;
+    font-family: 'Dongle', sans-serif;
+    font-size: 20px;
+    padding: 20px;
+
+}
