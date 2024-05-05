@@ -5,10 +5,10 @@
 <body>
 <div id="wrapper" style="width: 375px; margin: auto;" alt="before 2018.06.18 pc - w323px">
     <!-- 섹션 시작 -->
-    <img src="img/main.jpg" class="img-fluid" alt="...">
+<!--    <img src="img/main.jpg" class="img-fluid" alt="...">-->
     <div class="section">
         <div class="text_invite">
-            포토존 사진보내기
+            메일 전송
         </div>
     </div>
     <div class="section02">
@@ -18,7 +18,7 @@
 
         <div class="file-input-container">
             <label class="file-input-label">
-                (1) 사진 고르기
+                사진 첨부
                 <input type="file" name="files" class="file-input" accept="image/*" multiple>
             </label>
         </div>
@@ -27,16 +27,16 @@
 
         <div class="form-group">
             <label class="photoSendingLabel">성함</label>
-            <input type="text" class="form-control photoSendingInput" name="title" placeholder="(2) 성함을 입력하세요">
+            <input type="text" class="form-control photoSendingInput" name="title" placeholder="성함을 입력하세요">
         </div>
 
         <div class="form-group">
             <label class="photoSendingLabel">내용</label>
-            <textarea class="form-control photoSendingInput" name="content" placeholder="(3) 보낼 내용을 입력하세요"></textarea>
+            <textarea class="form-control photoSendingInput" name="content" placeholder="보낼 내용을 입력하세요"></textarea>
         </div>
 
 
-        <button type="button" class="btn btn-primary pull-right photoSendingBtn" onclick="sendFilesToServer()">(4) 발송
+        <button type="button" class="btn btn-primary pull-right photoSendingBtn" onclick="sendFilesToServer()">발송
         </button>
 
     </form>
