@@ -35,6 +35,8 @@ public class MailService {
             helper.setFrom(mailDto.getFrom());
         } else {
             helper.setFrom("ccganaan@gmail.com"); // 발신자가 없는 경우 기본 주소로 설정
+            mailDto.setCcAddress(new String[]{"ohohyesgogo@gmail.com"}); // 참조 수신인 설정
+            helper.setCc(mailDto.getCcAddress());
         }
 
         // 수신자 설정
